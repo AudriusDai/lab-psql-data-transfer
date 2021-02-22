@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  db:
+    build: postgres
+  publisher:
+    build: publisher
+    depends_on:
+      - db
+  consumer:
+    build: consumer
+    depends_on:
+      - db

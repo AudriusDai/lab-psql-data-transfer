@@ -1,0 +1,5 @@
+FROM python:3
+WORKDIR /
+COPY notify.py .
+RUN python -m pip install psycopg2
+CMD ["python", "-u", "notify.py"]
