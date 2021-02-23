@@ -24,11 +24,11 @@ Write queries i.e.:
 database=# select * from public.job_queue;
 ```
 # Functionality
-[postgres](postgres) - runs database with migrations scripts. Migration contains tables and trigger which populates the event to separate table.
+[postgres](postgres) - runs database with migrations scripts. Migration contains tables, trigger which populates the job to separate table & function for reading jobs.
 
 [publisher](publisher) - connects to db and does the INSERT to table periodically.
 
-[listener](listener) - connects to db and pulls the data from the events table. It should contain it's own data regarding latest handled records.
+[listener](listener) - connects to db and pulls the data from the jobs table.
 
 It should be fail-safe. By that you can turn off listener and turn back again - the listener will continue it's job.
 
