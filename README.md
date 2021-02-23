@@ -21,7 +21,7 @@ For connecting to db go to docker container of db & paste the commands:
 ```
 Write queries i.e.:
 ```
-database=# select * from publis.job_queue;
+database=# select * from public.job_queue;
 ```
 # Functionality
 [postgres](postgres) - runs database with migrations scripts. Migration contains tables and trigger which populates the event to separate table.
