@@ -1,5 +1,5 @@
 # lab-psql-data-transfer
-PoC for transferring data. It's based on trigger that might act on Update/Insert/Delete and populate the event to another table called `events`. Events are constantly being pulled by some python worker.
+PoC for transferring data. It's based on trigger that might act on Update/Insert/Delete and populate the job to another table called `job_queue`. Jobs are constantly being pulled by some python worker.
 
 For local setup you'll have to have a docker installed. Run these commands on root level:
 ```
