@@ -3,14 +3,8 @@ import time
 import psycopg2
 
 print('Starting publisher!')
-time.sleep(3)  # workaround alert! need to wait for db to bootup
-
-db_name = 'database'
-db_user = 'username'
-db_pass = 'secret'
-db_host = 'db'
-db_port = '5432'
-
+time.sleep(4)  # workaround alert! need to wait for db to bootup
+db_name, db_user, db_pass, db_host, db_port = ('database', 'username', 'secret', 'db', '5432')
 try:
     print('Connecting to db.')
     connection = psycopg2.connect(user=db_user,
@@ -20,12 +14,11 @@ try:
         database=db_name)
     cursor = connection.cursor()
 
-    print('Working..')
-    while True:
-        cursor.execute(f"INSERT INTO public.order(name, description, created_on) VALUES ('The name', 'Description it is!', '2004-10-19 10:23:54')")
+    print('Working on 10k inserts..')
+    for x in range(10_000):
+        cursor.execute(f"INSERT INTO public.order(name, description, created_on) VALUES ('The name', 'Description it is!', CURRENT_TIMESTAMP);")
         connection.commit()
-        print('Record inserted.')
-        time.sleep(0.5)
+    print('Records inserted.')
 finally:
     if(connection):
         cursor.close()

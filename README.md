@@ -13,6 +13,16 @@ Destroy setup:
 docker-compose down
 ```
 
+For connecting to db go to docker container of db & paste the commands:
+```
+> psql -h db -U username -d database
+> Password for user username: 
+> secret
+```
+Write queries i.e.:
+```
+database=# select * from publis.job_queue;
+```
 # Functionality
 [postgres](postgres) - runs database with migrations scripts. Migration contains tables and trigger which populates the event to separate table.
 
@@ -21,6 +31,8 @@ docker-compose down
 [listener](listener) - connects to db and pulls the data from the events table. It should contain it's own data regarding latest handled records.
 
 It should be fail-safe. By that you can turn off listener and turn back again - the listener will continue it's job.
+
+If job is stuck for more than 5 minutes, then Listener is going to pick it up again.
 
 # Cons
 - Listener is using polling mechanism every amount of time set. Not that efficient as Notify/Listen (pub/sub) approach.
